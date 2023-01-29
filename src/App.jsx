@@ -86,6 +86,7 @@ function App() {
 
   return (
     <div className="App">
+      <Typography>Enpara kredi kartı ekstre pdfleri</Typography>
       <Dropzone onChange={setFiles} />
       <Typography>Önceki bakiye: {previousBalance.format()}</Typography>
       <Grid container spacing={2}>
