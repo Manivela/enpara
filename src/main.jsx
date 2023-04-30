@@ -5,6 +5,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import App from "./App";
 import theme from "./theme";
 import "./index.css";
+import { inject } from "@vercel/analytics";
+inject();
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
