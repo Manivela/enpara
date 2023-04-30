@@ -5,6 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { lightGreen } from "@mui/material/colors";
 
 export default function BasicTable({ rows = [] }) {
   return (
@@ -22,7 +23,10 @@ export default function BasicTable({ rows = [] }) {
           {rows.map((row) => (
             <TableRow
               key={row.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                "&:last-child td, &:last-child th": { border: 0 },
+                backgroundColor: row.amount < 0 ? lightGreen[100] : undefined,
+              }}
             >
               <TableCell>{row.date?.toLocaleDateString()}</TableCell>
               <TableCell>{row.description}</TableCell>

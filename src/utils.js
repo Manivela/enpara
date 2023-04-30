@@ -75,7 +75,7 @@ export async function extractTableData(file) {
 
           if (
             (!a || a.length === 0) &&
-            tableData[tableData.length - 1].some((data) => data === undefined)
+            tableData[tableData.length - 1]?.some((data) => data === undefined)
           ) {
             tableData[tableData.length - 1] = tableData[
               tableData.length - 1
@@ -113,7 +113,7 @@ export async function extractTableData(file) {
               }
             });
           } else {
-            tableData.push([
+            const newRow = [
               a.length > 0
                 ? a
                     .map((x) => x.str)
@@ -138,7 +138,14 @@ export async function extractTableData(file) {
                     .join("")
                     .trim()
                 : undefined,
-            ]);
+            ];
+            const dateRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+            if (
+              dateRegex.test(newRow[0]) &&
+              newRow[1] !== "Ödeme - Otomatik tahsilat"
+            ) {
+              tableData.push(newRow);
+            }
           }
           currentRow = [];
         }
