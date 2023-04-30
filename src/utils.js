@@ -142,7 +142,8 @@ export async function extractTableData(file) {
             const dateRegex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
             if (
               dateRegex.test(newRow[0]) &&
-              newRow[1] !== "Ödeme - Otomatik tahsilat"
+              newRow[1] !== "Ödeme - Otomatik tahsilat" &&
+              newRow[1] !== "Ödeme - Enpara.com Cep Şubesi"
             ) {
               tableData.push(newRow);
             }
