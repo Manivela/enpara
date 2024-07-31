@@ -11,8 +11,8 @@ export async function extractTableData(file) {
   // Create an array to store the extracted table data
   const tableData = [];
   // Iterate over the pages
-  for (let i = 1; i <= numPages; i++) {
-    const page = await pdfDoc.getPage(i);
+  for (let pageIndex = 1; pageIndex <= numPages; pageIndex++) {
+    const page = await pdfDoc.getPage(pageIndex);
     const textContent = await page.getTextContent();
 
     // Extract the text from the textContent object
@@ -35,7 +35,10 @@ export async function extractTableData(file) {
     let c4x = c3x + c3w;
     let c4w = Math.round(page.view[2]) - c4x;
 
-    let end = textContent.items.find((item) => item.str.includes("Sayfa "));
+    let end = textContent.items.find(
+      (item) =>
+        item.str.includes("Sayfa ") || item.str.includes("Aylık alışveriş")
+    );
     let column1index = textContent.items.indexOf(column1);
     let endIndex = textContent.items.indexOf(end);
     // Create an empty array to store the current row
@@ -44,8 +47,8 @@ export async function extractTableData(file) {
     let prevX, prevY;
 
     // Iterate through the text items
-    for (let i = column1index; i < endIndex; i++) {
-      let item = textContent.items[i];
+    for (let rowIndex = column1index; rowIndex < endIndex; rowIndex++) {
+      let item = textContent.items[rowIndex];
       // Get the x and y coordinates of the current text item
       let x = item.transform[4];
       let y = item.transform[5];
@@ -160,3 +163,5 @@ export async function extractTableData(file) {
   // Return the extracted table data
   return tableData;
 }
+
+export const dateFormatter = new Intl.DateTimeFormat("tr-TR");

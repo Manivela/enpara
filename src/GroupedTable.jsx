@@ -10,6 +10,8 @@ import React from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { lightGreen } from "@mui/material/colors";
+import { dateFormatter } from "./utils";
+import { prepareForCompare } from "./App";
 
 function Row(props) {
   const { row } = props;
@@ -34,7 +36,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.description}
+          {prepareForCompare(row.description)}
         </TableCell>
         <TableCell>{row.installment}</TableCell>
         <TableCell align="right">{`${row.amount.format()}`}</TableCell>
@@ -54,7 +56,7 @@ function Row(props) {
                       }}
                     >
                       <TableCell>
-                        {transaction.date?.toLocaleDateString()}
+                        {dateFormatter.format(transaction.date)}
                       </TableCell>
                       <TableCell>{transaction.description}</TableCell>
                       <TableCell>{transaction.installment}</TableCell>

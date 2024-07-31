@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import BasicTable from "./BasicTable";
 import { Dropzone } from "./Dropzone";
-import { extractTableData } from "./utils";
+import { dateFormatter, extractTableData } from "./utils";
 import cuid from "cuid";
 import { Grid, Typography } from "@mui/material";
 import stringSimilarity from "string-similarity";
@@ -19,9 +19,10 @@ const TRY = (value) =>
     negativePattern: "-# !",
   });
 
-const ignorePartsRegex = /(İSTANBUL TRTR|IYZICO\/)/;
-function prepareForCompare(str) {
-  return str.replace(ignorePartsRegex, "").toLocaleLowerCase();
+const ignorePartsRegex =
+  /İSTANBUL|TRTR|IYZICO?\/|\(\d{1,3}(?:\.\d{3})*,\d{2} [A-Z]{2,3}\)|\(iade\)/gi;
+export function prepareForCompare(str) {
+  return str.replaceAll(ignorePartsRegex, "").toLocaleUpperCase();
 }
 
 function groupTransactionsByName(transactions) {
@@ -34,7 +35,7 @@ function groupTransactionsByName(transactions) {
         stringSimilarity.compareTwoStrings(
           prepareForCompare(g.description),
           prepareForCompare(transaction.description)
-        ) >= 0.4
+        ) >= 0.5
     );
     if (index !== -1) {
       grouped[index].amount = grouped[index].amount.add(transaction.amount);
@@ -43,7 +44,10 @@ function groupTransactionsByName(transactions) {
       grouped.push({ ...transaction, transactions: [transaction] });
     }
   }
-  return grouped;
+  return grouped.map((g) => {
+    g.transactions.sort((a, b) => a.date - b.date);
+    return g;
+  });
 }
 
 function groupTransactionsByDate(transactions) {
@@ -87,7 +91,7 @@ function App() {
         }
       }
       if (!ignore) {
-        setTransactions(t.sort((a, b) => b.date - a.date));
+        setTransactions(t.sort((a, b) => a.date - b.date));
       }
     });
 
@@ -107,7 +111,7 @@ function App() {
     ],
     xaxis: {
       categories: groupedTransactionsByDate.map((t) =>
-        t.date.toLocaleDateString()
+        dateFormatter.format(t.date)
       ),
     },
     tooltip: {

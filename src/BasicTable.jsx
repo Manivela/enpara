@@ -6,6 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { lightGreen } from "@mui/material/colors";
+import { dateFormatter } from "./utils";
 
 export default function BasicTable({ rows = [] }) {
   return (
@@ -28,7 +29,7 @@ export default function BasicTable({ rows = [] }) {
                 backgroundColor: row.amount < 0 ? lightGreen[100] : undefined,
               }}
             >
-              <TableCell>{row.date?.toLocaleDateString()}</TableCell>
+              <TableCell>{dateFormatter.format(row.date)}</TableCell>
               <TableCell>{row.description}</TableCell>
               <TableCell>{row.installment}</TableCell>
               <TableCell align="right">{`${row.amount.format()}`}</TableCell>

@@ -116,7 +116,10 @@ export function Dropzone(props) {
     <section className="container">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>
+          Dosyaları buraya sürükleyip bırakın veya dosyaları seçmek için
+          tıklayın.
+        </p>
       </div>
       <aside style={thumbsContainer}>{thumbs}</aside>
     </section>
