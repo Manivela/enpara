@@ -15,21 +15,21 @@
     "@mui/material": "^5.12.2",
     "@vercel/analytics": "^1.0.0",
     "apexcharts": "^3.40.0",
-    "cuid": "latest",
-    "currency.js": "latest",
-    "react": "latest",
+    "cuid": "^3.0.0",
+    "currency.js": "^2.0.4",
+    "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
-    "react-dom": "latest",
-    "react-dropzone": "latest",
-    "string-similarity": "latest"
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "string-similarity": "^4.0.4"
   },
   "devDependencies": {
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@vitejs/plugin-react": "latest",
-    "eslint": "latest",
-    "eslint-plugin-react": "latest",
-    "prettier": "latest",
-    "vite": "latest"
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react": "^3.0.1",
+    "eslint": "^8.33.0",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.3",
+    "vite": "^4.5.5"
   }
 }
