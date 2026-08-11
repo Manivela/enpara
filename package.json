@@ -30,9 +30,11 @@
     "eslint": "^8.33.0",
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.3",
-    "vite": "^8.0.5"
+    "vite": "^8.2.1"
   },
   "overrides": {
-    "@babel/runtime": "^7.26.10"
+    "@babel/runtime": "^7.26.10",
+    "postcss": "^8.5.18",
+    "js-yaml": "^4.3.0"
   }
 }
