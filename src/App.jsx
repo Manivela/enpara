@@ -8,7 +8,12 @@ import cuid from "cuid";
 import { Grid, Typography } from "@mui/material";
 import stringSimilarity from "string-similarity";
 import GroupedTable from "./GroupedTable";
-import Chart from "react-apexcharts";
+import ReactApexChart from "react-apexcharts";
+// react-apexcharts' CJS build sets its export via a compound assignment
+// ((exports.default = Charts).propTypes = ...) that Vite's dev (esbuild) and
+// build (Rollup commonjs) interop both fail to recognize as a plain default
+// export, so they double-wrap it as { default: Charts } instead of Charts.
+const Chart = ReactApexChart.default ?? ReactApexChart;
 
 const TRY = (value) =>
   currency(value, {
